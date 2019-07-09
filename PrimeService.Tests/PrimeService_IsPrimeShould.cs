@@ -27,7 +27,7 @@ namespace Prime.UnitTests.Services
 
             String artifactPath = $"PrimeService.Tests/bin/Debug/netcoreapp2.1/{path}";
             Console.WriteLine($"##teamcity[publishArtifacts '{artifactPath}']");
-            Console.WriteLine($"##teamcity[testMetadata type='artifact' value='{artifactPath}']");
+            Console.WriteLine($"##teamcity[testMetadata type='artifact' value='{path}']");
             
             var result = _primeService.IsPrime(1);
 
@@ -47,7 +47,7 @@ namespace Prime.UnitTests.Services
             
             String artifactPath = $"PrimeService.Tests/bin/Debug/netcoreapp2.1/{path}";
             Console.WriteLine($"##teamcity[publishArtifacts '{artifactPath}']");
-            Console.WriteLine($"##teamcity[testMetadata type='artifact' value='{artifactPath}']");
+            Console.WriteLine($"##teamcity[testMetadata type='artifact' value='{path}']");
 
             var result = _primeService.IsPrime(value);
 
