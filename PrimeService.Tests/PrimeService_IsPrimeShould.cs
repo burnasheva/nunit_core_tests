@@ -35,7 +35,7 @@ namespace Prime.UnitTests.Services
                 outputFile.WriteLine($"log message {value}");
             }
             
-            Console.WriteLine($"##teamcity[publishArtifacts '{path}']");
+            Console.WriteLine($"##teamcity[publishArtifacts 'PrimeService.Tests/bin/Debug/netcoreapp2.1/{path}']");
             
             var result = _primeService.IsPrime(value);
 
