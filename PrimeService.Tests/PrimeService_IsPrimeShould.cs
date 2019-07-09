@@ -19,6 +19,16 @@ namespace Prime.UnitTests.Services
         [Test]
         public void ReturnFalseGivenValueOf1()
         {
+            String path = $"logfile_first_test.txt";
+            using (StreamWriter outputFile = new StreamWriter(path))
+            {
+                outputFile.WriteLine($"log message first");
+            }
+
+            String artifactPath = $"PrimeService.Tests/bin/Debug/netcoreapp2.1/{path}";
+            Console.WriteLine($"##teamcity[publishArtifacts '{artifactPath}']");
+            Console.WriteLine($"##teamcity[testMetadata type='artifact' value='{artifactPath}']");
+            
             var result = _primeService.IsPrime(1);
 
             Assert.IsFalse(result, $"1 should not be prime");
@@ -35,8 +45,10 @@ namespace Prime.UnitTests.Services
                 outputFile.WriteLine($"log message {value}");
             }
             
-            Console.WriteLine($"##teamcity[publishArtifacts 'PrimeService.Tests/bin/Debug/netcoreapp2.1/{path}']");
-            
+            String artifactPath = $"PrimeService.Tests/bin/Debug/netcoreapp2.1/{path}";
+            Console.WriteLine($"##teamcity[publishArtifacts '{artifactPath}']");
+            Console.WriteLine($"##teamcity[testMetadata type='artifact' value='{artifactPath}']");
+
             var result = _primeService.IsPrime(value);
 
             Assert.IsFalse(result, $"{value} should not be prime"); 
