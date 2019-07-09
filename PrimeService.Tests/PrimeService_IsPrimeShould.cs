@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+using System.Reflection;
 using NUnit.Framework;
 using Prime.Services;
 
@@ -21,14 +24,23 @@ namespace Prime.UnitTests.Services
             Assert.IsFalse(result, $"1 should not be prime");
         }
         
-        [TestCase(-1)]
+        [TestCase(2)]
         [TestCase(0)]
         [TestCase(1)]
         public void ReturnFalseGivenValuesLessThan2(int value)
         {
-            var result = _primeService.IsPrime(value);
+            String path = $"logfile{value}.txt";
+            using (StreamWriter outputFile = new StreamWriter(path))
+            {
+                outputFile.WriteLine($"log message {value}");
+            }
             
+            Console.WriteLine($"##teamcity[publishArtifacts '{path}']");
+            
+            var result = _primeService.IsPrime(value);
+
             Assert.IsFalse(result, $"{value} should not be prime"); 
         }
+        
     }
 }
